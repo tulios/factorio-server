@@ -26,6 +26,6 @@ variable "aws_bucket_name" {
   default = "factorio-server"
 }
 
-varible "aws_instance_type" {
+variable "aws_instance_type" {
   default = "m3.medium"
 }
