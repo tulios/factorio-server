@@ -3,6 +3,10 @@ variable "aws_region" {
   default     = "eu-central-1"
 }
 
+variable "aws_availability_zone" {
+  default = "eu-central-1a"
+}
+
 variable "aws_access_key" {
   description = "AWS access key"
 }

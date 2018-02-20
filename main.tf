@@ -20,6 +20,7 @@ resource "aws_route" "internet_access" {
 
 resource "aws_subnet" "default" {
   vpc_id                  = "${aws_vpc.default.id}"
+  availability_zone       = "${var.aws_availability_zone}"
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 }
@@ -112,6 +113,7 @@ resource "aws_instance" "game_server" {
 
   instance_type          = "${var.aws_instance_type}"
   ami                    = "${lookup(var.aws_amis, var.aws_region)}"
+  availability_zone      = "${var.aws_availability_zone}"
   key_name               = "${var.aws_key_name}"
   vpc_security_group_ids = ["${aws_security_group.instance.id}"]
   subnet_id              = "${aws_subnet.default.id}"
