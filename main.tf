@@ -93,20 +93,11 @@ resource "aws_iam_role_policy" "game_server_iam_role_policy" {
     {
       "Effect": "Allow",
       "Action": [
-        "s3:ListBucket"
-      ],
-      "Resource": [
-        "arn:aws:s3:::bucket-name"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::factorio-server",
-        "arn:aws:s3:::factorio-server/*"
+        "arn:aws:s3:::${var.aws_bucket_name}",
+        "arn:aws:s3:::${var.aws_bucket_name}/*"
       ]
     }
   ]
@@ -119,9 +110,9 @@ resource "aws_instance" "game_server" {
     user = "centos"
   }
 
-  instance_type          = "m3.medium"
+  instance_type          = "${var.aws_instance_type}"
   ami                    = "${lookup(var.aws_amis, var.aws_region)}"
-  key_name               = "${var.key_name}"
+  key_name               = "${var.aws_key_name}"
   vpc_security_group_ids = ["${aws_security_group.instance.id}"]
   subnet_id              = "${aws_subnet.default.id}"
   iam_instance_profile   = "${aws_iam_instance_profile.game_server_instance_profile.id}"

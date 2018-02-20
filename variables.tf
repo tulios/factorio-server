@@ -17,7 +17,15 @@ variable "aws_amis" {
   }
 }
 
-variable "key_name" {
+variable "aws_key_name" {
   description = "Desired name of AWS key pair"
   default     = "private-factorio"
+}
+
+variable "aws_bucket_name" {
+  default = "factorio-server"
+}
+
+varible "aws_instance_type" {
+  default = "m3.medium"
 }
