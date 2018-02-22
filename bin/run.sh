@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-export PATH=$PATH:.local/bin
+export PATH=$PATH:/root/.local/bin
 
 sudo systemctl start docker
 sudo docker pull dtandersen/factorio:stable
