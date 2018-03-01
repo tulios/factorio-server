@@ -1,18 +1,18 @@
 #!/bin/bash -ex
 
-export PATH=$PATH:/root/.local/bin
+export PATH=$PATH:/root/.local/bin:.local/bin
 
 sudo systemctl start docker
 sudo docker pull dtandersen/factorio:stable
 
 sudo mkdir -p /opt/factorio
-aws s3 sync s3://factorio-server /opt/factorio --region eu-central-1 --delete
+sudo /root/.local/bin/aws s3 sync s3://factorio-server /opt/factorio --region eu-central-1 --delete
 
 cat <<EOF > /tmp/backupSavesToS3.sh
 #!/bin/bash -e
 export PATH=$PATH
 echo "($(date)) Running backup saves to S3"
-aws s3 sync /opt/factorio s3://factorio-server --region eu-central-1
+sudo /root/.local/bin/aws s3 sync /opt/factorio s3://factorio-server --region eu-central-1
 echo
 EOF
 
