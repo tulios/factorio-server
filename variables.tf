@@ -1,10 +1,10 @@
 variable "aws_region" {
   description = "AWS region to launch servers."
-  default     = "eu-central-1"
+  default     = "eu-north-1"
 }
 
 variable "aws_availability_zone" {
-  default = "eu-central-1a"
+  default = "eu-north-1a"
 }
 
 variable "aws_access_key" {
@@ -15,9 +15,18 @@ variable "aws_secret_key" {
   description = "AWS secret key"
 }
 
+variable "aws_hosted_zone_id" {
+  description = "AWS hosted zone id"
+}
+
+variable "aws_host_name" {
+  description = "AWS hosted name, e.g: www.example.com"
+}
+
 variable "aws_amis" {
   default = {
     eu-central-1 = "ami-5ecdad31"
+    eu-north-1   = "ami-03c410dec515e1aa0"
   }
 }
 
@@ -31,5 +40,5 @@ variable "aws_bucket_name" {
 }
 
 variable "aws_instance_type" {
-  default = "m3.medium"
+  default = "t3.micro"
 }

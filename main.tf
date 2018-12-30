@@ -116,8 +116,14 @@ resource "aws_instance" "game_server" {
   availability_zone      = "${var.aws_availability_zone}"
   key_name               = "${var.aws_key_name}"
   vpc_security_group_ids = ["${aws_security_group.instance.id}"]
-  subnet_id              = "${aws_subnet.default.id}"
-  iam_instance_profile   = "${aws_iam_instance_profile.game_server_instance_profile.id}"
+
+  subnet_id            = "${aws_subnet.default.id}"
+  iam_instance_profile = "${aws_iam_instance_profile.game_server_instance_profile.id}"
+
+  ebs_block_device {
+    device_name           = "/dev/sda1"
+    delete_on_termination = true
+  }
 
   provisioner "file" {
     source      = "./bin/run.sh"
@@ -130,4 +136,12 @@ resource "aws_instance" "game_server" {
       "/tmp/run.sh",
     ]
   }
+}
+
+resource "aws_route53_record" "sthlm" {
+  zone_id = "${var.aws_hosted_zone_id}"
+  name    = "${var.aws_host_name}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${aws_instance.game_server.public_ip}"]
 }
