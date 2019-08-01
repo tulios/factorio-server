@@ -1,6 +1,10 @@
 # Factorio Server
 
 ```sh
+# First time
+terraform init
+
+# Remaining times
 terraform apply
 # terraform destroy
 ```

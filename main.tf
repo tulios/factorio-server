@@ -1,4 +1,5 @@
 provider "aws" {
+  version    = "~> 2.0"
   region     = "${var.aws_region}"
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
@@ -108,7 +109,9 @@ EOF
 
 resource "aws_instance" "game_server" {
   connection {
-    user = "centos"
+    host        = self.public_ip
+    user        = "centos"
+    private_key = file("${path.module}/private-factorio.pem")
   }
 
   instance_type          = "${var.aws_instance_type}"

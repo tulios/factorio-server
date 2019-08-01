@@ -1,10 +1,10 @@
 #!/bin/bash -ex
 
 export PATH=$PATH:/root/.local/bin:.local/bin
-export FACTORIO_VERSION=0.16.51
+export FACTORIO_VERSION=0.17.60
 
 sudo systemctl start docker
-sudo docker pull dtandersen/factorio:${FACTORIO_VERSION}
+sudo docker pull factoriotools/factorio:${FACTORIO_VERSION}
 
 sudo mkdir -p /opt/factorio
 sudo chown 845:845 /opt/factorio
@@ -54,4 +54,4 @@ sudo docker run -d \
   -v /opt/factorio:/factorio:Z \
   --name factorio \
   --restart=always  \
-  dtandersen/factorio:${FACTORIO_VERSION}
+  factoriotools/factorio:${FACTORIO_VERSION}
