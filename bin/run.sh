@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 export PATH=$PATH:/root/.local/bin:.local/bin
-export FACTORIO_VERSION=0.17.60
+export FACTORIO_VERSION=0.17.69
 
 sudo systemctl start docker
 sudo docker pull factoriotools/factorio:${FACTORIO_VERSION}
